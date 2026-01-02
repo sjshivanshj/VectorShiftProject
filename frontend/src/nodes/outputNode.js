@@ -17,6 +17,7 @@ export const OutputNode = ({ id, data }) => {
 
   return (
     <BaseNode
+      id={id}
       title="Output"
       subtitle="Type '{{' in downstream nodes to leverage output fields" 
       inputs={[{ id: `${id}-value` }]}

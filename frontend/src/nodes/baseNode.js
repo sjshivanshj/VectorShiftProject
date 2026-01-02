@@ -1,18 +1,24 @@
-// // BaseNode.js
-
 // baseNode.js
 import { Handle, Position } from 'reactflow';
+import { useStore } from '../store';
 import './node.css';
 
 export const BaseNode = ({
+  id,
   title,
   subtitle,
   inputs = [],
   outputs = [],
   children,
+  className = '',
 }) => {
+  const removeNode = useStore((state) => state.removeNode);
+  
   return (
-    <div className="vs-node">
+    
+    <div className={`vs-node ${className}`}>
+
+    
 
       {/* HEADER */}
       <div className="vs-node-header">
@@ -20,7 +26,10 @@ export const BaseNode = ({
            <div className="vs-node-icon">⇨</div>
           <span className="vs-node-title">{title}</span>
         </div>
-        <span className="vs-node-close">×</span>
+        {/* <span className="vs-node-close">×</span> */}
+        <button
+          className="vs-node-close"
+          onClick={() => removeNode(id)}>×</button>
       </div>
 
       {/* SUBTITLE */}
@@ -40,7 +49,7 @@ export const BaseNode = ({
           type="target"
           position={Position.Left}
           id={input.id}
-          style={{ top: 70 + i * 24 }}
+          style={{ top: `${((i + 1) * 100) / (inputs.length + 1)}%`, }}
         />
       ))}
 
@@ -58,84 +67,3 @@ export const BaseNode = ({
 };
 
 
-
-// import { Handle, Position } from 'reactflow';
-// import './node.css';
-
-// /*
-//   BaseNode
-//   ----------
-//   Common wrapper for all nodes.
-
-//   Props:
-//   - title: string (Node title)
-//   - inputs: array of { id, top? }  -> left handles
-//   - outputs: array of { id, top? } -> right handles
-//   - children: JSX (custom node content)
-//   - style: optional style override (for dynamic sizing)
-// */
-
-// export const BaseNode = ({
-//   title,
-//   inputs = [],
-//   outputs = [],
-//   children,
-//   style = {},
-// }) => {
-//   return (
-//     <div
-//       style={{
-//         width: 200,
-//         minHeight: 80,
-//         border: '1px solid #333',
-//         borderRadius: 8,
-//         padding: 10,
-//         backgroundColor: '#fff',
-//         boxSizing: 'border-box',
-//         ...style,
-//       }}
-//     >
-//       {/* LEFT (INPUT) HANDLES */}
-//       {inputs.map((input, index) => (
-//         <Handle
-//           key={input.id}
-//           type="target"
-//           position={Position.Left}
-//           id={input.id}
-//           style={{
-//             top: input.top ?? `${((index + 1) * 100) / (inputs.length + 1)}%`,
-//           }}
-//         />
-//       ))}
-
-//       {/* RIGHT (OUTPUT) HANDLES */}
-//       {outputs.map((output, index) => (
-//         <Handle
-//           key={output.id}
-//           type="source"
-//           position={Position.Right}
-//           id={output.id}
-//           style={{
-//             top: output.top ?? `${((index + 1) * 100) / (outputs.length + 1)}%`,
-//           }}
-//         />
-//       ))}
-
-//       {/* NODE TITLE */}
-//       <div
-//         style={{
-//           fontWeight: 'bold',
-//           marginBottom: 8,
-//           textAlign: 'center',
-//         }}
-//       >
-//         {title}
-//       </div>
-
-//       {/* NODE CONTENT */}
-//       <div>
-//         {children}
-//       </div>
-//     </div>
-//   );
-// };

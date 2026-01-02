@@ -1,0 +1,31 @@
+.vs-submit-btn {
+  background-color: #5b5ef7;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 20px;
+  font-size: 12px;
+  font-weight: 150;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  /* box-shadow: 0 6px 16px rgba(91, 94, 247, 0.35); */
+}
+
+/* HOVER EFFECT */
+.vs-submit-btn:hover {
+  background-color: #4a4df0;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(91, 94, 247, 0.45);
+}
+
+/* CLICK / ACTIVE */
+.vs-submit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(91, 94, 247, 0.3);
+}
+
+/* FOCUS (keyboard accessibility) */
+.vs-submit-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(91, 94, 247, 0.4);
+}

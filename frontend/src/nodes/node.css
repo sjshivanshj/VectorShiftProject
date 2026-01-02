@@ -102,21 +102,61 @@
 }
 
 .vs-text-input {
+  
   width: 100%;
-  padding: 11px 10px;
+  padding: 11px 11px;
   border-radius: 12px;                 
   border: 1px solid #808080;           
   font-size: 14px;
   background: #ffffff;
   color: #000307;
   box-sizing: border-box;
-  margin-top: 1px;
+  margin-top: 8px;
   overflow: hidden;                    
   resize: none ;
   min-height: 44px;
-  line-height: 1.4;
+  /* margin-left: 65px; */
 }
 
 .vs-text-input{
-  height: auto ;
+  height:min-content ;
+}
+
+.vs-node-close {
+  background: transparent;  
+  border: none;              
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #333;
+  padding: 0;
+  line-height: 1;
+}
+
+.vs-node-close:hover {
+  color: #000;
+}
+
+.vs-text-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.vs-text-vars {
+  min-width: 8px;
+  flex-direction:column;
+  gap: 4px;
+  font-size: 12px;
+  color: #444;
+  padding-top: -10px;
+}
+
+.vs-text-var {
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.vs-text-node {
+  width: 340px;
 }

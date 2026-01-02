@@ -1,6 +1,8 @@
 // submit.js
 
 import { useStore } from './store';
+import './submit.css';
+
 
 export const SubmitButton = () => {
   const { nodes, edges } = useStore();
@@ -35,8 +37,8 @@ export const SubmitButton = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <button onClick={handleSubmit}>Submit</button>
+    <div style={{ display: 'flex', justifyContent: 'center'}}>
+      <button className="vs-submit-btn" onClick={handleSubmit}>Submit</button>
     </div>
   );
 };
