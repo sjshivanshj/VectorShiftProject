@@ -110,5 +110,13 @@
   background: #ffffff;
   color: #000307;
   box-sizing: border-box;
-  margin-top: 1px;                    
+  margin-top: 1px;
+  overflow: hidden;                    
+  resize: none ;
+  min-height: 44px;
+  line-height: 1.4;
+}
+
+.vs-text-input{
+  height: auto ;
 }

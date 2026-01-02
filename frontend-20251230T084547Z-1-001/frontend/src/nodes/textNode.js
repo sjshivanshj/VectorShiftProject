@@ -33,11 +33,15 @@ export const TextNode = ({ id, data }) => {
     >
    <div className="vs-text-wrapper">
         {/* <label className="vs-text-label">Text</label> */}
-        <input
-          type="text"
-          className="vs-text-input"
+        <textarea
+          // type="text"
+          // className="vs-text-input"
+          // value={currText}
+          // onChange={(e) => setCurrText(e.target.value)}
+          className="vs-text-input" 
           value={currText}
           onChange={(e) => setCurrText(e.target.value)}
+          rows={1}
         />
       </div>
     </BaseNode>
