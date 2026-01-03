@@ -1,12 +1,14 @@
 // listPipelines.js
 
 import { useState } from 'react';
+import { useStore } from './store';
 import './submit.css';
 
 export const ListPipelinesButton = () => {
   const [showModal, setShowModal] = useState(false);
   const [pipelines, setPipelines] = useState([]);
   const [loading, setLoading] = useState(false);
+  const loadPipeline = useStore((state) => state.loadPipeline);
 
   const handleListPipelines = async () => {
     setLoading(true);
@@ -29,17 +31,22 @@ export const ListPipelinesButton = () => {
       const response = await fetch(`http://localhost:8000/pipelines/${pipelineId}`);
       const result = await response.json();
 
-      // Display pipeline details
+      // Load the pipeline into the canvas
+      loadPipeline(result.nodes, result.edges);
+
+      // Close the modal
+      setShowModal(false);
+
+      // Show success message
       alert(
-        `Pipeline Details:\n\n` +
+        `Pipeline Loaded Successfully! ✓\n\n` +
         `ID: ${result.id}\n` +
-        `Created: ${new Date(result.created_at).toLocaleString()}\n` +
         `Nodes: ${result.metadata.num_nodes}\n` +
         `Edges: ${result.metadata.num_edges}\n` +
         `Is DAG: ${result.metadata.is_dag ? 'Yes' : 'No'}`
       );
     } catch (err) {
-      alert('Error fetching pipeline details');
+      alert('Error loading pipeline');
       console.error(err);
     }
   };

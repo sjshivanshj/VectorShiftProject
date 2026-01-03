@@ -60,4 +60,10 @@ export const useStore = create((set, get) => ({
     ),
   });
 },
+    loadPipeline: (nodes, edges) => {
+      set({
+        nodes: nodes,
+        edges: edges,
+      });
+    },
   }));
