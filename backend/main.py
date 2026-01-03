@@ -191,3 +191,34 @@ def get_pipeline(pipeline_id: str):
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error retrieving pipeline: {str(e)}")
+
+
+@app.delete("/pipelines/{pipeline_id}")
+def delete_pipeline(pipeline_id: str):
+    """
+    Delete a saved pipeline by its ID.
+
+    Args:
+        pipeline_id: The unique identifier of the pipeline to delete
+
+    Returns:
+        dict: Confirmation message
+    """
+    try:
+        file_path = PIPELINES_DIR / f"{pipeline_id}.json"
+
+        if not file_path.exists():
+            raise HTTPException(status_code=404, detail=f"Pipeline '{pipeline_id}' not found")
+
+        # Delete the file
+        os.remove(file_path)
+
+        return {
+            "message": "Pipeline deleted successfully",
+            "pipeline_id": pipeline_id
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error deleting pipeline: {str(e)}")

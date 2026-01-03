@@ -28,7 +28,7 @@ export const ListPipelinesButton = () => {
     try {
       const response = await fetch(`http://localhost:8000/pipelines/${pipelineId}`);
       const result = await response.json();
-      
+
       // Display pipeline details
       alert(
         `Pipeline Details:\n\n` +
@@ -40,6 +40,33 @@ export const ListPipelinesButton = () => {
       );
     } catch (err) {
       alert('Error fetching pipeline details');
+      console.error(err);
+    }
+  };
+
+  const handleDeletePipeline = async (pipelineId, event) => {
+    // Prevent event bubbling
+    event.stopPropagation();
+
+    // Confirm deletion
+    if (!window.confirm(`Are you sure you want to delete pipeline "${pipelineId}"?`)) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:8000/pipelines/${pipelineId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        // Remove the pipeline from the list
+        setPipelines(pipelines.filter(p => p.id !== pipelineId));
+        alert('Pipeline deleted successfully');
+      } else {
+        alert('Error deleting pipeline');
+      }
+    } catch (err) {
+      alert('Error deleting pipeline');
       console.error(err);
     }
   };
@@ -65,6 +92,13 @@ export const ListPipelinesButton = () => {
                 <div className="pipelines-list">
                   {pipelines.map((pipeline) => (
                     <div key={pipeline.id} className="pipeline-item">
+                      <button
+                        className="delete-icon"
+                        onClick={(e) => handleDeletePipeline(pipeline.id, e)}
+                        title="Delete pipeline"
+                      >
+                        ×
+                      </button>
                       <div className="pipeline-info">
                         <div className="pipeline-id">{pipeline.id}</div>
                         <div className="pipeline-meta">
@@ -75,7 +109,7 @@ export const ListPipelinesButton = () => {
                           </span>
                         </div>
                       </div>
-                      <button 
+                      <button
                         className="view-btn"
                         onClick={() => handleViewPipeline(pipeline.id)}
                       >
